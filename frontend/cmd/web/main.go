@@ -12,8 +12,8 @@ func main() {
 		render(w, "test.page.gohtml")
 	})
 
-	fmt.Println("Starting front end service on port 8080")
-	err := http.ListenAndServe(":8080", nil)
+	fmt.Println("Starting front end service on port 8000")
+	err := http.ListenAndServe(":8000", nil)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -22,13 +22,13 @@ func main() {
 func render(w http.ResponseWriter, t string) {
 
 	partials := []string{
-		"./templates/base.layout.gohtml",
-		"./templates/header.partial.gohtml",
-		"./templates/footer.partial.gohtml",
+		"./cmd/web/templates/base.layout.gohtml",
+		"./cmd/web/templates/header.partial.gohtml",
+		"./cmd/web/templates/footer.partial.gohtml",
 	}
 
 	var templateSlice []string
-	templateSlice = append(templateSlice, fmt.Sprintf("./templates/%s", t))
+	templateSlice = append(templateSlice, fmt.Sprintf("./cmd/web/templates/%s", t))
 
 	templateSlice = append(templateSlice, partials...)
 
