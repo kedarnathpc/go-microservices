@@ -50,3 +50,7 @@ stop_front:
 	@echo "Stopping front end..."
 	@-pkill -SIGTERM -f "./${FRONT_END_BINARY}"
 	@echo "Stopped front end!"
+
+##kill docker-proxy running processes
+kill_docker_proxy:
+	@./kill_docker_proxy.sh
