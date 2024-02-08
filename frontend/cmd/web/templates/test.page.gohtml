@@ -50,7 +50,7 @@
         }
 
         const headers = new Headers();
-        headers.append("Content-Type", "application/json")
+        headers.append("Content-Type", "application/json");
 
         const body = {
             method: 'POST',
@@ -64,7 +64,7 @@
             sent.innerHTML = JSON.stringify(payload, undefined, 4);
             received.innerHTML = JSON.stringify(data, undefined, 4);
             if (data.error) {
-                output.innerHTML += `<br><strong>Error : </strong> ${data.message}`;
+                output.innerHTML += `<br><strong>Error:</strong> ${data.message}`;
             } else {
                 output.innerHTML += `<br><strong>Response from broker service</strong>: ${data.message}`;
             }
@@ -73,7 +73,6 @@
             output.innerHTML += "<br><br>Error: " + error;
         })
     })
-
 
     brokerBtn.addEventListener("click", function() {
 

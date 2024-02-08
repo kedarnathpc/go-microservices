@@ -51,6 +51,15 @@ stop_front:
 	@-pkill -SIGTERM -f "./${FRONT_END_BINARY}"
 	@echo "Stopped front end!"
 
-##kill docker-proxy running processes
+## kill docker-proxy running processes
 kill_docker_proxy:
 	@./kill_docker_proxy.sh
+
+## rebuild local data
+rebuild_local_postgres:
+	@echo "Deleting local postgres directory from db-data"
+	sudo rm -rf ./db-data/postgres
+	@echo "making new directory"
+	mkdir -p ./db-data/postgres
+	@echo "changing permissions of the new made directory"
+	chmod 777 ./db-data/postgres
