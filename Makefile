@@ -71,6 +71,7 @@ rebuild_local_postgres:
 	@echo "changing permissions of the new made directory"
 	chmod 777 ./db-data/postgres
 
+## rebuild local mongo data
 rebuild_local_mongo:
 	@echo "Deleting local mongo directory from db-data"
 	sudo rm -rf ./db-data/mongo
