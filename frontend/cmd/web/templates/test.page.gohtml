@@ -41,10 +41,10 @@
     let sent = document.getElementById("payload");
     let recevied = document.getElementById("received");
 
-    logBtn.addEventListener("click", function(){
+    logBtn.addEventListener("click", function() {
         const payload = {
             action: "log",
-            log:{
+            log: {
                 name: "event",
                 data: "Some kind of data",
             }
@@ -71,10 +71,9 @@
             }
         })
         .catch((error) => {
-            output.innerHTML += "<br><br>Error: " + error;
-        })
+            output.innerHTML += "<br><br>Eror: " + error;
+        })        
     })
-
 
     authBrokerBtn.addEventListener("click", function() {
 
@@ -107,7 +106,7 @@
             }
         })
         .catch((error) => {
-            output.innerHTML += "<br><br>Error: " + error;
+            output.innerHTML += "<br><br>Eror: " + error;
         })
     })
 
@@ -120,7 +119,7 @@
         fetch("http:\/\/localhost:8080", body)
         .then((response) => response.json())
         .then((data) => {
-            sent.innerHTML = "empty post request";
+            sent.innerHTML ="empty post request";
             received.innerHTML = JSON.stringify(data, undefined, 4);
             if (data.error) {
                 console.log(data.message);
@@ -129,7 +128,7 @@
             }
         })
         .catch((error) => {
-            output.innerHTML += "<br><br>Error: " + error;
+            output.innerHTML += "<br><br>Eror: " + error;
         })
     })
         

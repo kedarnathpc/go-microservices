@@ -13,24 +13,24 @@ import (
 
 var client *mongo.Client
 
-type Models struct {
-	LogEntry LogEntry
-}
-
-type LogEntry struct {
-	ID        string    `bson:"_id,omitempty" json"id,omitempty"`
-	Name      string    `bson:"name" json:"name"`
-	Data      string    `bson:"data" json:"data"`
-	CreatedAt time.Time `bson:"created_at" json:"created_at"`
-	UpdatedAt time.Time `bson:"updated_at" json:"updated_at"`
-}
-
 func New(mongo *mongo.Client) Models {
 	client = mongo
 
 	return Models{
 		LogEntry: LogEntry{},
 	}
+}
+
+type Models struct {
+	LogEntry LogEntry
+}
+
+type LogEntry struct {
+	ID        string    `bson:"_id,omitempty" json:"id,omitempty"`
+	Name      string    `bson:"name" json:"name"`
+	Data      string    `bson:"data" json:"data"`
+	CreatedAt time.Time `bson:"created_at" json:"created_at"`
+	UpdatedAt time.Time `bson:"updated_at" json:"updated_at"`
 }
 
 func (l *LogEntry) Insert(entry LogEntry) error {
@@ -42,9 +42,8 @@ func (l *LogEntry) Insert(entry LogEntry) error {
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	})
-
 	if err != nil {
-		log.Println("Error inserting into logs: ", err)
+		log.Println("Error inserting into logs:", err)
 		return err
 	}
 
@@ -62,10 +61,9 @@ func (l *LogEntry) All() ([]*LogEntry, error) {
 
 	cursor, err := collection.Find(context.TODO(), bson.D{}, opts)
 	if err != nil {
-		log.Println("Finding all docs error : ", err)
+		log.Println("Finding all docs error:", err)
 		return nil, err
 	}
-
 	defer cursor.Close(ctx)
 
 	var logs []*LogEntry
@@ -75,14 +73,14 @@ func (l *LogEntry) All() ([]*LogEntry, error) {
 
 		err := cursor.Decode(&item)
 		if err != nil {
-			log.Println("Error decoding log into slice : ", err)
+			log.Print("Error decoding log into slice:", err)
 			return nil, err
 		} else {
 			logs = append(logs, &item)
 		}
 	}
 
-	return logs, err
+	return logs, nil
 }
 
 func (l *LogEntry) GetOne(id string) (*LogEntry, error) {
@@ -137,8 +135,7 @@ func (l *LogEntry) Update() (*mongo.UpdateResult, error) {
 				{"name", l.Name},
 				{"data", l.Data},
 				{"updated_at", time.Now()},
-			},
-			},
+			}},
 		},
 	)
 
