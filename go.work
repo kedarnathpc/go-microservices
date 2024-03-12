@@ -1,8 +1,9 @@
-go 1.21.6
+go 1.22.1
 
 use (
 	./authentication-service
 	./broker-service
 	./frontend
 	./logger-service
+	./mail-service
 )
