@@ -4,6 +4,7 @@ use (
 	./authentication-service
 	./broker-service
 	./frontend
+	./listener-service
 	./logger-service
 	./mail-service
 )
