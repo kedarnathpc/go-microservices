@@ -1,1 +1,7 @@
 db-data/
+authentication-service/authApp
+broker-service/brokerApp
+frontend/frontApp
+listener-service/listenerApp
+logger-service/loggerServiceApp
+mail-service/mailerApp
