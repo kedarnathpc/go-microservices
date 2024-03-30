@@ -12,7 +12,7 @@ up:
 	@echo "Docker images started!"
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
-up_build: build_broker build_auth build_logger build_mail build_listener
+up_build: build_broker build_auth build_logger build_mail build_listener build_front
 	@echo "Stopping docker images (if running...)"
 	docker-compose down
 	@echo "Building (when required) and starting docker images..."
@@ -71,25 +71,3 @@ stop_front:
 	@echo "Stopping front end..."
 	@-pkill -SIGTERM -f "./${FRONT_END_BINARY}"
 	@echo "Stopped front end!"
-
-## kill docker-proxy running processes
-kill_docker_proxy:
-	@./kill_docker_proxy.sh
-
-## rebuild local data
-rebuild_local_postgres:
-	@echo "Deleting local postgres directory from db-data"
-	sudo rm -rf ./db-data/postgres
-	@echo "making new directory"
-	mkdir -p ./db-data/postgres
-	@echo "changing permissions of the new made directory"
-	chmod 777 ./db-data/postgres
-
-## rebuild local mongo data
-rebuild_local_mongo:
-	@echo "Deleting local mongo directory from db-data"
-	sudo rm -rf ./db-data/mongo
-	@echo "making new directory"
-	mkdir -p ./db-data/mongo
-	@echo "changing permissions of the new made directory"
-	chmod 777 ./db-data/mongo
